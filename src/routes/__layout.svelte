@@ -1,45 +1,40 @@
-<script lang="ts">
-	import Header from '$lib/header/Header.svelte';
-	import '../app.css';
+<script context="module" lang="ts">
+  import {getMdRoutes} from "../utils/md-files";
+
+  export const load = async () => {
+    return {
+      props: {
+        posts: getMdRoutes()
+      }
+    }
+  }
 </script>
 
-<Header />
+<script lang="ts">
+  import AsideMenu from '$lib/AsideMenu.svelte';
+  import '../app.css';
 
-<main>
-	<slot />
-</main>
+  export let posts;
+</script>
 
-<footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
+<div class="flex flex-col min-h-screen">
+  <header class="flex-0 px-4">
+    <a href="/"
+       title="go to Nuvolaris home"
+    ><img width="80"
+          src="/logo.png"
+          alt="Nuvolaris.org"></a>
+  </header>
 
-<style>
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
+  <div class="flex-1 md:flex flex flex-row">
+    <aside class="p-4 md:w-[15rem] flex-0 relative">
+      <AsideMenu items={posts} />
+    </aside>
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
+    <main class="flex-1 bg-gray-50 p-4">
+      <slot/>
+    </main>
+  </div>
 
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	}
-</style>
+  <footer class="flex-0">footer</footer>
+</div>

@@ -1,0 +1,6 @@
+[submodule "src/modules/documentation"]
+	path = src/modules/documentation
+	url = https://github.com/nuvolaris/nuvolaris-documentation
+[submodule "src/modules/cli"]
+	path = src/modules/cli
+	url = https://github.com/nuvolaris/nuvolaris-cli
